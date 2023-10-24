@@ -29,7 +29,7 @@ SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://cloudpharma.vercel.app']
+ALLOWED_HOSTS = ['https://arkgroup.pythonanywhere.com']
 
 
 # Application definition
