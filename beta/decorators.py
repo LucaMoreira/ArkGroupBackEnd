@@ -8,7 +8,7 @@ from rest_framework import status
 
 
 HEADERS      = {
-    "Access-Control-Allow-Origin": "http://localhost:3000",
+    "Access-Control-Allow-Origin": "https://cloudpharma.vercel.app",
     "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization"
     }

@@ -24,7 +24,7 @@ from django.core.mail import send_mail
 # Create your views here.
 TOKEN_EXPIRE = 86400
 HEADERS      = {
-    "Access-Control-Allow-Origin": "http://localhost:3000",
+    "Access-Control-Allow-Origin": "https://cloudpharma.vercel.app",
     "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization"
     }
@@ -60,7 +60,7 @@ def login_user(request):
 
     try:
         login(request, account)
-        return Response({"token": user_token}, status=status.HTTP_200_OK, headers={"Access-Control-Allow-Origin": "http://localhost:3000"})
+        return Response({"token": user_token}, status=status.HTTP_200_OK, headers={"Access-Control-Allow-Origin": "https://cloudpharma.vercel.app"})
     except Exception as e:
         return Response("account doesnt exist", status=status.HTTP_401_UNAUTHORIZED, headers=HEADERS)
 
@@ -211,7 +211,7 @@ def forgot_password(request):
         
         send_mail(
             'Recuperação de senha - Cloud Pharma',
-            f'Entre no link abaixo http://localhost:3000/recoverpassword/{token}',
+            f'Entre no link abaixo https://cloudpharma.vercel.app/recoverpassword/{token}',
             settings.EMAIL_HOST_USER,
             [email],
             fail_silently=False,
@@ -235,8 +235,8 @@ def create_subscription(request):
                 }
             ],
             mode = 'subscription', 
-            success_url = 'http://localhost:3000/success/{CHECKOUT_SESSION_ID}',
-            cancel_url = 'http://localhost:3000/failure'       
+            success_url = 'https://cloudpharma.vercel.app/success/{CHECKOUT_SESSION_ID}',
+            cancel_url = 'https://cloudpharma.vercel.app/failure'       
         )
         return redirect(checkout_session.url , code=303)
     except Exception as message:

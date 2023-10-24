@@ -29,7 +29,7 @@ SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', 'http://localhost:3000']
+ALLOWED_HOSTS = ['https://cloudpharma.vercel.app']
 
 
 # Application definition
@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:3000',
+    'https://cloudpharma.vercel.app',
 )
 
 REST_FRAMEWORK = {
