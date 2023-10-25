@@ -5,10 +5,11 @@ from beta.decorators import check_auth
 from .models import Medcine, Choice
 from rest_framework import status
 from .serializers import MedcineSerializer
+from django.conf import settings
 
 
 HEADERS : dict = {
-    "Access-Control-Allow-Origin": "https://cloudpharma.vercel.app",
+    "Access-Control-Allow-Origin": settings.FRONTEND_URL,
     "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization"
     }

@@ -29,7 +29,8 @@ SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['arkgroup.pythonanywhere.com']
+ALLOWED_HOSTS = [env('ALLOWED_HOST')]
+FRONTEND_URL  = 'https://cloudpharma.vercel.app'
 
 
 # Application definition
@@ -51,7 +52,7 @@ INSTALLED_APPS = [
 CORS_ORIGIN_ALLOW_ALL = False
 
 CORS_ORIGIN_WHITELIST = (
-    'https://cloudpharma.vercel.app',
+    FRONTEND_URL,
 )
 
 REST_FRAMEWORK = {

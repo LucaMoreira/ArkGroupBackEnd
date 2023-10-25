@@ -5,10 +5,11 @@ from .utils import token_expire_handler, get_auth
 from .models import User
 from rest_framework.response import Response
 from rest_framework import status
+from django.conf import settings
 
 
 HEADERS      = {
-    "Access-Control-Allow-Origin": "https://cloudpharma.vercel.app",
+    "Access-Control-Allow-Origin": settings.FRONTEND_URL,
     "Access-Control-Allow-Methods": "POST, PUT, PATCH, GET, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Origin, X-Api-Key, X-Requested-With, Content-Type, Accept, Authorization"
     }
