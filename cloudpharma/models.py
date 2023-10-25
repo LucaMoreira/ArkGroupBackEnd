@@ -8,14 +8,14 @@ CONSUMPTION_CHOICES = (
     ("1", "Domingo"),
     ("2", "Segunda"),
     ("3", "Terca"),
-    ("1", "Quarta"),
-    ("2", "Quinta"),
-    ("3", "Sexta"),
+    ("4", "Quarta"),
+    ("5", "Quinta"),
+    ("6", "Sexta"),
     ("7", "Sabado")
 )
 
 class Choice(models.Model):
-    choice = models.CharField(max_length=50, choices=CONSUMPTION_CHOICES)
+    choice = models.CharField(max_length=50, choices=CONSUMPTION_CHOICES, unique=True)
     
     def __str__(self):
         return CONSUMPTION_CHOICES[int(self.choice) - 1][1]
@@ -37,5 +37,5 @@ class Medcine(models.Model):
 
 @receiver(post_save, sender=Medcine, dispatch_uid="update_medcine")
 def update_medcine(sender, instance, **kwargs):
-    dates                             = get_dates_delta(instance.purchase_date)
+    dates                                     = get_dates_delta(str(instance.purchase_date))
     instance.actual_amount, instance.end_date = calculate_daily(dates, instance.consumption, instance.initial_amount, instance.amount_consumed)

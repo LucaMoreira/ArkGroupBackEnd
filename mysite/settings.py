@@ -29,8 +29,10 @@ SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# https://www.pythonanywhere.com/
+# https://cloudpharma-front.vercel.app/
 ALLOWED_HOSTS = [env('ALLOWED_HOST')]
-FRONTEND_URL  = 'https://cloudpharma.vercel.app'
+FRONTEND_URL  = 'https://cloudpharma-front.vercel.app/'
 
 
 # Application definition

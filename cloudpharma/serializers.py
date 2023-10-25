@@ -7,7 +7,7 @@ class ConsumptionSerializer(serializers.ModelSerializer):
         fields = ['choice']
 
 class MedcineSerializer(serializers.ModelSerializer):
-    consumption = ConsumptionSerializer(read_only=True, many=True)
+    consumption = ConsumptionSerializer(many=True)
     class Meta:
         model = Medcine
         fields = ['id', 'name', 'consumption', 'amount_consumed', 'initial_amount', 'actual_amount', 'purchase_date', 'end_date', 'owner']

@@ -55,7 +55,7 @@ class ApiTests(APITestCase):
             'user'           : USER,
             'token'          : self.token,
             'name'           : 'Minesulida',
-            'consumption'    : 'Quinta',
+            'consumption'    : [1,2,3],
             'amount_consumed': '2',
             'initial_amount' : '60',
             'purchase_date'  : '20/03/2023'
@@ -107,7 +107,7 @@ class ApiTests(APITestCase):
         data : dict = {
             'user'           : USER,
             'token'          : self.token,
-            'id'             : 'Minesulida'
+            'id'             : Medcine.objects.get(name='Minesulida').id
         }
         response : HttpResponse = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK, 'Could not delete medcine!')
