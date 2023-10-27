@@ -4,7 +4,7 @@ from beta.models import User
 from beta.decorators import check_auth
 from .models import Medcine, Choice, CONSUMPTION_CHOICES
 from rest_framework import status
-from .serializers import MedcineSerializer
+from .serializers import MedcineSerializer, ConsumptionSerializer
 from django.conf import settings
 
 
@@ -58,27 +58,28 @@ def create_med(request):
 @api_view(["POST"])
 @check_auth(['Client'])
 def update_med(request):
-    try:
-        id                      = request.data['id']
-        username                = request.data['user']
-        name                    = request.data['name']
-        consumption             = request.data['consumption']
-        initial_amount          = request.data['initial_amount']
-        purchase_date           = request.data['purchase_date']
-        owner                   = User.objects.get(username=username)
-        medcine                 = Medcine.objects.get(id=id)
-        for day in consumption:
-            day_name = CONSUMPTION_CHOICES[day-1][0]
-            choice   = Choice.objects.get(choice=day_name)
-            medcine.consumption.add(choice)
-        medcine.initial_amount  = initial_amount
-        medcine.purchase_date   = purchase_date
-        medcine.save()
-
-        return Response(status=SUCCESS, headers=HEADERS)
+    id                      = request.data['id']
+    username                = request.data['user']
+    name                    = request.data['name']
+    consumption             = request.data['consumption']
+    initial_amount          = request.data['initial_amount']
+    purchase_date           = request.data['purchase_date']
+    owner                   = User.objects.get(username=username)
+    medcine                 = Medcine.objects.get(id=id)
     
-    except Exception as e:
-        return Response(status=ERROR, headers=HEADERS)
+    for day in medcine.consumption.all():
+        if int(day.choice) not in consumption:
+            medcine.consumption.remove(day)
+    
+    for day in consumption:
+        day_name = CONSUMPTION_CHOICES[day-1][0]
+        choice   = Choice.objects.get(choice=day_name)
+        medcine.consumption.add(choice)
+    medcine.initial_amount  = initial_amount
+    medcine.purchase_date   = purchase_date
+    medcine.save()
+
+    return Response(status=SUCCESS, headers=HEADERS)
 
 
 @api_view(["POST"])
