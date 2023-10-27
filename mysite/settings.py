@@ -32,7 +32,7 @@ DEBUG = True
 # https://www.pythonanywhere.com/
 # https://cloudpharma.vercel.app/
 ALLOWED_HOSTS = [env('ALLOWED_HOST')]
-FRONTEND_URL  = 'http://localhost:3000'
+FRONTEND_URL  = 'https://cloudpharma.vercel.app/'
 
 
 # Application definition
