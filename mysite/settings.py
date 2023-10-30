@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # https://www.pythonanywhere.com/
 # https://cloudpharma.vercel.app/
