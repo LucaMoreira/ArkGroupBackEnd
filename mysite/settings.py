@@ -31,7 +31,7 @@ SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 DEBUG = False
 
 # https://www.pythonanywhere.com/
-# https://cloudpharma.vercel.app/
+# https://cloudpharma.vercel.app
 ALLOWED_HOSTS = [env('ALLOWED_HOST')]
 FRONTEND_URL  = 'https://cloudpharma.vercel.app'
 

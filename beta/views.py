@@ -210,7 +210,7 @@ def forgot_password(request):
         
         send_mail(
             'Recuperação de senha - Cloud Pharma',
-            f'Entre no link abaixo {settings.FRONTEND_URL}recoverpassword/{token}',
+            f'Entre no link abaixo {settings.FRONTEND_URL}/recoverpassword/{token}',
             settings.EMAIL_HOST_USER,
             [email],
             fail_silently=False,
@@ -234,11 +234,12 @@ def create_subscription(request):
                 }
             ],
             mode = 'subscription', 
-            success_url = settings.FRONTEND_URL + 'success/{CHECKOUT_SESSION_ID}',
-            cancel_url  = settings.FRONTEND_URL +'failure'       
+            success_url = settings.FRONTEND_URL + '/success/{CHECKOUT_SESSION_ID}',
+            cancel_url  = settings.FRONTEND_URL + '/failure'       
         )
         return redirect(checkout_session.url , code=303)
     except Exception as message:
+        print(message)
         return Response(message, status=ERROR, headers=HEADERS)
 
 @api_view(['POST'])
