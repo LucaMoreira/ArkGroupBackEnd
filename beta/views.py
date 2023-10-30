@@ -97,7 +97,6 @@ def create_user(request):
         login(request, user)
         return Response(data, status=SUCCESS, headers=HEADERS)
     except Exception as e:
-        print(e)
         return Response(status=ERROR, headers=HEADERS)
 
 

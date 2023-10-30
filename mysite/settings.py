@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import environ
+import os
 
 env = environ.Env()
 environ.Env.read_env()
@@ -32,7 +33,7 @@ DEBUG = True
 # https://www.pythonanywhere.com/
 # https://cloudpharma.vercel.app/
 ALLOWED_HOSTS = [env('ALLOWED_HOST')]
-FRONTEND_URL  = 'https://cloudpharma.vercel.app/'
+FRONTEND_URL  = 'https://cloudpharma.vercel.app'
 
 
 # Application definition
@@ -149,10 +150,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL          = '/static/'
+STATIC_ROOT         = os.path.join(BASE_DIR, 'staticfiles')
 STRIPE_PRIVATE_KEY  = env('STRIPE_PRIVATE_KEY')
 
-#EMAIL_BACKEND       = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_BACKEND       = 'beta.email_backend.EmailBackend'
 EMAIL_HOST          = 'smtp.gmail.com'
 EMAIL_PORT          = 587

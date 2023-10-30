@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from django.http import HttpResponse
 from beta.models import User
-from .models import Medcine
+from .models import Medcine, Choice, CONSUMPTION_CHOICES
 import json
 
 USER     : str = 'Luca'
@@ -20,6 +20,9 @@ class ApiTests(APITestCase):
         """
         Ensure we can create and login with a user.
         """
+        
+        for choice in CONSUMPTION_CHOICES:
+            Choice.objects.create(choice=choice[0])
         
         register_url   : str   = '/create_user/'
         register_data  : dict  = {
@@ -58,7 +61,7 @@ class ApiTests(APITestCase):
             'consumption'    : [1,2,3],
             'amount_consumed': '2',
             'initial_amount' : '60',
-            'purchase_date'  : '20/03/2023'
+            'purchase_date'  : '2023-10-20'
         }
         response : HttpResponse = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK, 'Could not create medcine!')
@@ -88,11 +91,12 @@ class ApiTests(APITestCase):
         data : dict = {
             'user'           : USER,
             'token'          : self.token,
+            'id'             : Medcine.objects.get(name='Minesulida').id,
             'name'           : 'Minesulida',
-            'consumption'    : 'Quinta',
+            'consumption'    : [1,2,3],
             'amount_consumed': '2',
             'initial_amount' : '60',
-            'purchase_date'  : '20/03/2023'
+            'purchase_date'  : '2023-03-20'
         }
         response : HttpResponse = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK, 'Could not update medcine!')
