@@ -1,0 +1,63 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/dashboard.css" %}">{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content %}
+<div class="col left">
+    {% include "admin/app_list.html" with app_list=app_list show_changelinks=True %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div class="col right">
+    <div class="card white" style="margin-top: 0px;">
+        <div class="card-title" style="border-bottom: 1px solid black; background-color: #264b5d;">
+            <h6 class=" white-text"   style="padding: 10px 5px 2px 5px;
+                                                    font-size: 0.9rem;
+                                                    font-weight:200;
+                                                    letter-spacing: 0.5px;">
+                {% translate 'RECENT ACTIONS' %}
+            </h6>
+        </div>
+        {% load log %}
+        {% get_admin_log 10 as admin_log for_user user %}
+        {% if not admin_log %}
+        <p>{% translate 'None available' %}</p>
+        {% else %}
+            <table class="black">
+                <tbody>
+                    {% for entry in admin_log %}
+                        <tr>
+                            <td class="center">
+                                <i  class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}"></i>
+                            </td>
+                            <td>
+                                {% if entry.is_deletion or not entry.get_admin_url %}
+                                    {{ entry.object_repr }}
+                                {% else %}
+                                    <a class="white-text" href="{{ entry.get_admin_url }}">{{ entry.object_repr }}</a>
+                                {% endif %}
+                                <br>
+                                {% if entry.content_type %}
+                                    <span class="grey-text mini quiet">{% filter capfirst %}{{ entry.content_type.name }}{% endfilter %}</span>
+                                {% else %}
+                                    <span class="grey-text mini quiet">{% translate 'Unknown content' %}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

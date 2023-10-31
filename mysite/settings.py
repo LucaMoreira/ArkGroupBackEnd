@@ -28,12 +28,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '_+)(imlc#m!^-uzkco)rh!@vf)!%9bx&_$r*+*sbaj)ymd0ui0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # https://www.pythonanywhere.com/
 # https://cloudpharma.vercel.app
 ALLOWED_HOSTS = [env('ALLOWED_HOST')]
-FRONTEND_URL  = 'https://cloudpharma.vercel.app'
+FRONTEND_URL  = 'http://localhost:3000'
 
 
 # Application definition
@@ -85,7 +85,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates"),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
