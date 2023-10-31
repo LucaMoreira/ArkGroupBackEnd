@@ -29,4 +29,3 @@ class NewUserAdmin(BaseUserAdmin):
 
 admin.site.register(User, NewUserAdmin)
 admin.site.register(PasswordToken)
-#admin.site.unregister(Group)
