@@ -5,6 +5,22 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css">
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems, {});
+  });
+</script>
+<style>
+  .related-widget-wrapper {
+    overflow: visible !important;
+  }
+</style>
 {% block dark-mode-vars %}
   <link rel="stylesheet" href="{% static "admin/css/dark_mode.css" %}">
 {% endblock %}
@@ -69,8 +85,8 @@
     {% endblock %}
     <!-- END Header -->
     {% block breadcrumbs %}
-    <div class="breadcrumbs red">
-    <a href="{% url 'admin:index' %}">{% translate 'Home sweet home' %}</a>
+    <div class="breadcrumbs">
+    <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
     {% if title %} &rsaquo; {{ title }}{% endif %}
     </div>
     {% endblock %}

@@ -1,0 +1,40 @@
+<fieldset class="module aligned {{ fieldset.classes }}">
+    {% if fieldset.name %}<h2>{{ fieldset.name }}</h2>{% endif %}
+    {% if fieldset.description %}
+        <div class="description">{{ fieldset.description|safe }}</div>
+    {% endif %}
+    {% for line in fieldset %}
+        <div style="overflow: visible;" class="form-row{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% if not line.has_visible_field %} hidden{% endif %}{% for field in line %}{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% endfor %}">
+            {% if line.fields|length_is:'1' %}
+                <div class="row">
+                    <div class="col left">
+                        {{ line.errors }}
+                    </div>
+                </div>
+            {% endif %}
+            {% for field in line %}
+                <div {% if not line.fields|length_is:'1' %} class="fieldBox{% if field.field.name %} field-{{ field.field.name }}{% endif %}{% if not field.is_readonly and field.errors %} errors{% endif %}{% if field.field.is_hidden %} hidden{% endif %}"{% elif field.is_checkbox %} class="checkbox-row"{% endif %}>
+                    {% if not line.fields|length_is:'1' and not field.is_readonly %}{{ field.errors }}{% endif %}
+                    {% if field.is_checkbox %}
+                        <label style="padding-bottom: 0px;">
+                            <input style="position:relative; opacity:1;" type="checkbox" name={{field.field.name}} id="id_{{field.field.name}}" {% if field.field.value %}checked{% endif %}>
+                            {{ field.label_tag }}
+                        </label>
+                    {% else %}
+                        {{ field.label_tag }}
+                        {% if field.is_readonly %}
+                            <div class="readonly">{{ field.contents }}</div>
+                        {% else %}
+                            {{ field.field }}
+                        {% endif %}
+                    {% endif %}
+                    {% if field.field.help_text %}
+                        <div class="help"{% if field.field.id_for_label %} id="{{ field.field.id_for_label }}_helptext"{% endif %}>
+                            {{ field.field.help_text|safe }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</fieldset>

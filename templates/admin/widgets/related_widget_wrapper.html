@@ -1,0 +1,41 @@
+{% load i18n static %}
+<div class="related-widget-wrapper row" {% if not model_has_limit_choices_to %}data-model-ref="{{ model }}"{% endif %}>
+    {{ rendered_widget }}
+    {% block links %}
+        {% spaceless %}
+        {% if not is_hidden %}
+        {% if can_change_related %}
+        <a class="related-widget-wrapper-link change-related col s3 m3 l3" id="change_id_{{ name }}"
+            data-href-template="{{ change_related_template_url }}?{{ url_params }}"
+            data-popup="yes"
+            title="{% blocktranslate %}Change selected {{ model }}{% endblocktranslate %}">
+            <img src="{% static 'admin/img/icon-changelink.svg' %}" alt="{% translate 'Change' %}">
+        </a>
+        {% endif %}
+        {% if can_add_related %}
+        <a class="related-widget-wrapper-link add-related col s3 m3 l3" id="add_id_{{ name }}"
+            data-popup="yes"
+            href="{{ add_related_url }}?{{ url_params }}"
+            title="{% blocktranslate %}Add another {{ model }}{% endblocktranslate %}">
+            <img src="{% static 'admin/img/icon-addlink.svg' %}" alt="{% translate 'Add' %}">
+        </a>
+        {% endif %}
+        {% if can_delete_related %}
+        <a class="related-widget-wrapper-link delete-related col s3 m3 l3" id="delete_id_{{ name }}"
+            data-href-template="{{ delete_related_template_url }}?{{ url_params }}"
+            data-popup="yes"
+            title="{% blocktranslate %}Delete selected {{ model }}{% endblocktranslate %}">
+            <img src="{% static 'admin/img/icon-deletelink.svg' %}" alt="{% translate 'Delete' %}">
+        </a>
+        {% endif %}
+        {% if can_view_related %}
+          <a class="related-widget-wrapper-link view-related col s3 m3 l3" id="view_id_{{ name }}"
+             data-href-template="{{ change_related_template_url }}?{{ view_related_url_params }}"
+             title="{% blocktranslate %}View selected {{ model }}{% endblocktranslate %}">
+            <img src="{% static 'admin/img/icon-viewlink.svg' %}" alt="{% translate 'View' %}">
+          </a>
+        {% endif %}
+        {% endif %}
+        {% endspaceless %}
+    {% endblock %}
+</div>

@@ -4,13 +4,13 @@
   {% for app in app_list %}
     <div class="app-{{ app.app_label }} module{% if app.app_url in request.path|urlencode %} current-app{% endif %}">
       <table>
-        <caption>
-          <a href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{ app.name }}</a>
+        <caption style="line-height: normal;">
+          <a style="padding-top: 0px;" href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">{{ app.name }}</a>
         </caption>
         {% for model in app.models %}
           <tr class="model-{{ model.object_name|lower }}{% if model.admin_url in request.path|urlencode %} current-model{% endif %}">
             {% if model.admin_url %}
-              <th scope="row"><a class="white-text" href="{{ model.admin_url }}"{% if model.admin_url in request.path|urlencode %} aria-current="page"{% endif %}>{{ model.name }}</a></th>
+              <th scope="row"><a class="cyan-text text-darken-2" href="{{ model.admin_url }}"{% if model.admin_url in request.path|urlencode %} aria-current="page"{% endif %}>{{ model.name }}</a></th>
             {% else %}
               <th scope="row">{{ model.name }}</th>
             {% endif %}

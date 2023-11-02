@@ -1,0 +1,41 @@
+{% load i18n %}
+<div class="actions">
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems, {});
+    });
+  </script>
+  <div class="row" style="margin-bottom: 0px;">
+  {% block actions %}
+      {% block actions-form %}
+        {% for field in action_form %}
+        {% if field.label %}<div class="col l5 m6 s12">{% endif %}
+          {% if field.label %}<label><div class="col m3" style="margin-top: 15px;">{{ field.label }}</div>{% endif %}
+            {% if field.label %}<div class="col m9 right">{% endif %}{{ field}}{% if field.label %}</div>{% endif %}
+          {% if field.label %}</label>{% endif %}
+        {% if field.label %}</div>{% endif %}
+        {% endfor %}
+      {% endblock %}
+    <div class="col l1 m2 s2 left" style="margin-top: 15px;">
+      {% block actions-submit %}
+        <button type="submit" class="button btn" style="background-color: #205067;" title="{% translate "Run the selected action" %}" name="index" value="{{ action_index|default:0 }}">{% translate "Go" %}</button>
+      {% endblock %}
+    </div>
+    <div class="col l6 m4 s10 left" style="margin-top: 15px;">
+    {% block actions-counter %}
+    {% if actions_selection_counter %}
+        <span class="action-counter" data-actions-icnt="{{ cl.result_list|length }}">{{ selection_note }}</span>
+        {% if cl.result_count != cl.result_list|length %}
+        <span class="all hidden">{{ selection_note_all }}</span>
+        <span class="question hidden">
+            <a href="#" title="{% translate "Click here to select the objects across all pages" %}">{% blocktranslate with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktranslate %}</a>
+        </span>
+        <span class="clear hidden"><a href="#">{% translate "Clear selection" %}</a></span>
+        {% endif %}
+    {% endif %}
+    {% endblock %}
+    </div>
+  {% endblock %}
+</div>
+</div>
